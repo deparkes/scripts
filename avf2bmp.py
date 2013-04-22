@@ -15,6 +15,7 @@ def get_bmp(path):
 
 # Run the oommf conversion tool - this outputs to the current dir
 # Watch out for windows paths with a backslash
+# Edit the config file to set how the output bmp files will look.
 cmd_to_run = 'tclsh C:/oommf-1.2a5/oommf.tcl avf2ppm -config C:/oommf-1.2a5/avf2ppm.config -format B24 -ipat %s' % sys.argv[1]
 subprocess.call(cmd_to_run, shell=True)
 
