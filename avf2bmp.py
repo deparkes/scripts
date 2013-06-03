@@ -1,5 +1,14 @@
 #!/usr/bin/python
 # Script for converting oommf vector files to bitmap
+# Usage:
+# avf2bmp.py *.omf
+# If current folder is named 'raw' it will assume you have a name/raw, name/bmp,
+# name/blah folder tree and make a new folder ../bmp
+# Otherwise it will make ./bmp and put the output bmp files there.
+# TODO: 
+# - Make a argparser
+# - Make it easier to change the config file used (see argparser)
+# - Sort out 'file exists' error
 import subprocess
 import os
 import sys
