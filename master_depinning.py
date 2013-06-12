@@ -3,6 +3,8 @@
 # 2. avf2bmp.py *.omf
 # 3. bmp2avi.py
 # Go to /raw folder for that experiment
+# TODO:
+# - Also include generation of matlab files
 import subprocess
 import os
 
@@ -10,7 +12,6 @@ import os
 print "Convert data table to .dat format"
 subprocess.call("odt2dat.py", shell=True)
 
-	
 # Convert omf files to bmp with avf2bmp.py *.bmp
 print "Convert omf vector files to bitmaps"
 subprocess.call("avf2bmp.py *.omf", shell=True)
