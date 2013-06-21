@@ -31,6 +31,7 @@ if not os.path.exists(crop_dir):
 # images to the new folder.
 current_dir = os.getcwd()
 for i, filename in enumerate(get_bmp(current_dir)): # loop through each file
+    print "Working on file: " + filename
     fpath, filename = os.path.split(filename)
     cmd_to_run = 'convert ' + filename + ' -crop 25%x100%+2700+0 ./cropped/cropped_'+ filename
     subprocess.call(cmd_to_run, shell=True)
