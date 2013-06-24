@@ -8,6 +8,8 @@ import shutil
 Use ffmpeg to convert a series of bmp files to an avi video.
 Requires ffmpeg to be on the path.
 Doing this conversion on a big stack of bitmaps may take a while.
+Usage: >bmp2avi.py #converts all bmp images in current folder to avi.
+
 TODO:
 - have command line control over ffmpeg options e.g. frame rate
 - sort out ffmpeg_command
@@ -36,16 +38,19 @@ def get_bmp(path):
 
 
 # Make tmp dir to put movie processing files in 
+print "Making temporary directory..."
 tmp_dir = './bmp2avitmp'
 if not os.path.exists(tmp_dir):
     os.makedirs(tmp_dir)
 
 # Copy bitmaps to this tmp dir
+print "Copying bmp files to temp directory"
 current_dir = os.getcwd()
 for i, filename in enumerate(get_bmp(current_dir)): # loop through each file
     shutil.copy(filename, tmp_dir)
 
 # Rename these files into a format good for ffmpeg
+print "Renaming temp bmp files for ffmpeg processing"
 for i, filename in enumerate(get_bmp(tmp_dir)): # loop through each file
     count = "%03d" % i
     newname = "./%s/img%s.bmp" % (tmp_dir,count) # create a function that does step 2, above
@@ -54,8 +59,11 @@ for i, filename in enumerate(get_bmp(tmp_dir)): # loop through each file
     except:
         break
     
+print "Running ffmpeg"
 ffmpeg_command = 'ffmpeg -f image2 -i ./bmp2avitmp/img%03d.bmp -r 15 video.avi'
 subprocess.call(ffmpeg_command)
 
 # Clean up by deleting the temporary folder
+print "Removing temporary directory"
 shutil.rmtree(tmp_dir)
+print "Done"
