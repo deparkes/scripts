@@ -5,7 +5,8 @@
 # Otherwise it will make ./bmp and put the output bmp files there.
 # TODO: 
 # - Make a argparser
-# - 
+# - Use crop_dir variable in cmd_to_run output dir
+
 import subprocess
 import os
 import sys
