@@ -14,6 +14,7 @@ import os
 import sys
 import shutil
 import glob
+import img_label
 
 def get_bmp(path):
     # A function to find the omf magnetisation vector files in a particular folder.
@@ -21,6 +22,12 @@ def get_bmp(path):
     #create an array of file names based on the search for omf files.
     files_array = glob.glob(omf_path)
     return files_array
+
+def label_image(filename):
+    fpath, filename = os.path.split(filename)
+    print "Working on file: " + filename
+    cmd_to_run = 'convert ' + filename + ' -gravity South -annotate 0 \'%f\' ' + filename
+    subprocess.call(cmd_to_run, shell=True)
 
 # Run the oommf conversion tool - this outputs to the current dir
 # Watch out for windows paths with a backslash
@@ -49,5 +56,13 @@ if not os.path.exists(bmp_dir):
 # move bitmaps to this tmp dir
 current_dir = os.getcwd()
 for i, filename in enumerate(get_bmp(current_dir)): # loop through each file
+    label_image(filename)
     shutil.move(filename, bmp_dir)
-# avf2bmp.py
+    
+
+# Annotate the images with their file names. This should help figuring out
+# what is going on when they get converted to movies.
+#print('Annotate images with file names...\n')
+#os.chdir(bmp_dir)
+#imf_label_cmd = 'img_label.py %s' % sys.argv[1]
+#subprocess.call(img_label_cmd, shell=True)
