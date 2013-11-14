@@ -14,7 +14,6 @@ import os
 import sys
 import shutil
 import glob
-import img_label
 
 def get_bmp(path):
     # A function to find the omf magnetisation vector files in a particular folder.
@@ -25,7 +24,7 @@ def get_bmp(path):
 
 def label_image(filename):
     fpath, filename = os.path.split(filename)
-    print "Working on file: " + filename
+    print "Label image: " + filename
     cmd_to_run = 'convert ' + filename + ' -gravity South -annotate 0 \'%f\' ' + filename
     subprocess.call(cmd_to_run, shell=True)
 
@@ -35,7 +34,8 @@ def label_image(filename):
 # avf2ppm.configLOWRES makes small images (quicker, but looks ugly)
 # avf2ppm.configHIGHRES: Makes high res images for cropping to a region
 # avf2ppm.configAUTO: uses automatic settings
-cmd_to_run = 'tclsh C:/oommf-1.2a5/oommf.tcl avf2ppm -config C:/oommf-1.2a5/avf2ppm.configLOWRES -format B24 -ipat %s' % sys.argv[1]
+# avf2ppm.configBW: uses automatic settings
+cmd_to_run = 'tclsh C:/oommf-1.2a5/oommf.tcl avf2ppm -config C:/oommf-1.2a5/avf2ppm.configBW -format B24 -ipat %s' % sys.argv[1]
 subprocess.call(cmd_to_run, shell=True)
 
 # Create a folder in which to store the images (unless it already exists)
