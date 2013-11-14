@@ -47,6 +47,7 @@ if not os.path.exists(tmp_dir):
 print "Copying bmp files to temp directory"
 current_dir = os.getcwd()
 for i, filename in enumerate(get_bmp(current_dir)): # loop through each file
+    print "Copying file: " + filename
     shutil.copy(filename, tmp_dir)
 
 # Rename these files into a format good for ffmpeg
